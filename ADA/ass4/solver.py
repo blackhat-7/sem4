@@ -36,8 +36,8 @@ def shortest_path(start, end):
             if x not in moves:
                 q.append(x)
                 moves[x] = m + [rubik.quarter_twists_names[rubik.quarter_twists[i]]]
-    # if found:
-        # sys.stdout.write(str(finalm) + "\n")
+    if found:
+        sys.stdout.write(str(finalm) + "\n")
     return finalm
             
     
@@ -90,12 +90,13 @@ def shortest_path_optmized(start, end):
             if y not in movesEnd:
                 qEnd.append(y)
                 movesEnd[y] = n + [rubik.quarter_twists_names[rubik.perm_inverse(rubik.quarter_twists[i])]]
-    # if found:
-        # sys.stdout.write(str(finalMoves) + "\n")
+    if found:
+        sys.stdout.write(str(finalMoves) + "\n")
     sys.stdout.write("time: " + str(time.time()-startTime) + "\n")
     return finalMoves
 
-def check(start, end, sol): #['F', 'F', 'Ui', 'L', 'Ui', 'F', 'Li', 'U', 'Li', 'Fi', 'Li', 'U', 'Li', 'Fi']
+#Check whether sol actually solves the rubik from start to end
+def check(start, end, sol): 
     for i in sol:
         x = rubik.quarter_twists_names.keys()[rubik.quarter_twists_names.values().index(i)]
         start = rubik.perm_apply(x, start)
@@ -104,40 +105,42 @@ def check(start, end, sol): #['F', 'F', 'Ui', 'L', 'Ui', 'F', 'Li', 'U', 'Li', '
     else:
         sys.stdout.write("Wrong\n")
 
+#Compare time
 def compareTime(time1, time2):
     sys.stdout.write(str(time1/time2) + " times faster")
 
+#Main function that runs the normal and the optimized algorithm, check the solutions and time the solutions
 def main(start):
     global avgTimeN
     global avgTimeO
     end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-    # sys.stdout.write("Normal: \n")
+    sys.stdout.write("Normal: \n")
     startTime = time.time()
     route = shortest_path(start, end)
     avgTimeN += time.time()-startTime
-    # check(start, end, route)
+    check(start, end, route)
     
-    # sys.stdout.write("Optimized: \n")
+    sys.stdout.write("Optimized: \n")
     startTime = time.time()
     routeOptimized = shortest_path_optmized(start, end)
     avgTimeO += time.time()-startTime
-    # check(start, end, routeOptimized)
+    check(start, end, routeOptimized)
 
     sys.stdout.write("\n")
 
 
 
 if __name__ == '__main__':
-    timesRun = 30
+    timesRun = 30                                                                                              #Number of tests
+    maxLengthOfSolution = 8                                                                                    #Max number of steps it takes to solve
+
     for k in range(timesRun):
         start = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-        for i in range(8):
+        for i in range(maxLengthOfSolution):
             x = random.randint(0, 5)
-            # print(rubik.quarter_twists_names[rubik.quarter_twists[x]])
             start = rubik.perm_apply(rubik.quarter_twists[x], start)
         main(start)
+
     avgTimeN /= timesRun
     avgTimeO /= timesRun
     compareTime(avgTimeN, avgTimeO)
-    # print(rubik.perm_apply(rubik.quarter_twists[5], end))
-    # main()
