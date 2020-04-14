@@ -1,0 +1,31 @@
+Mess
+-----
+Mess_ID -> Menu
+Mess_ID -> Ration_required
+Mess_ID -> Schedule
+Mess_ID -> Complaints
+Mess_ID -> Workers
+Mess_ID -> Amount_per_meal
+
+
+InMess
+{Mess_ID, RollNo} -> Month
+
+
+Clubs
+ClubName -> Budget_allocated
+ClubName -> No._of_members
+ClubName -> Coordinators
+ClubName -> Room
+ClubName -> Recent_performance
+ClubName -> Recent_inter_college_high
+
+
+InClubs
+{RollNo, ClubName} -> StartSemester
+{RollNo, ClubName} -> EndSemester
+{RollNo, ClubName} -> Position
+
+
+
+
