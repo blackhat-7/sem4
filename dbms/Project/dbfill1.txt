@@ -1,0 +1,82 @@
+CREATE TABLE `FMS` (
+	`EmployeeeID` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Name` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Hostel` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`RequestID` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`EmployeeID`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `prereq` (
+	`CourseCode` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`PrereqCode` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`CourseCode`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `takes` (
+	`RollNo` INT(11) NOT NULL,
+	`CourseCode` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Semester` INT(11) NOT NULL,
+	`Grade` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`RollNo`, `CourseCode`, `Semester`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `TAsin` (
+	`RollNo` INT(11) NOT NULL ,
+	`CourseCode` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Semester` INT(11) NOT NULL,
+	PRIMARY KEY (`RollNo`, `CourseCode`, `Semester`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `Requests/Complaints` (
+	`RequestID` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`type` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`RequestText` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Contact` INT(11) NOT NULL,
+	`RollNo` INT(11) NOT NULL,
+	`CurrStatus` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`RequestID`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `Courses` (
+	`CourseCode` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`EmployeeID`  VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`TAs` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Name` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Time-slot` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`PrereqCode` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Credits` INT(11) NOT NULL,
+	`Semester` INT(11) NOT NULL,
+	`No. of students enrolled` INT(11) NOT NULL,
+	PRIMARY KEY (`CourseCode`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `Students` (
+	`RollNo.` INT(11) NOT NULL,
+	`First _Name` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Last_Name` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`DOB` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`phone_no` INT(11) NOT NULL,
+	`Blood_group` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Hostel_ID` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`MessID` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`BranchID` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Credits` INT(11) NOT NULL ,
+	`email` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`Grade` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	CurrentSemester INT(11) NOT NULL ,
+	PRIMARY KEY (`RollNo`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;

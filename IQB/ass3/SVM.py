@@ -42,12 +42,8 @@ def main():
             row.extend(temp_row)
         sequence_vector.append(row)
     
-
-    # x_tr, x_ts, y_tr, y_ts = train_test_split(sequence_vector, sequence_output_vector, test_size=0.2)
-    sv = BalancedBaggingClassifier(svm.SVC(), n_estimators=30, sampling_strategy="auto", replacement=False, random_state=0)
+    sv = BalancedBaggingClassifier(svm.SVC(), n_estimators=100, sampling_strategy="auto", bootstrap=False)
     sv.fit(sequence_vector, sequence_output_vector)
-    # predicted = sv.predict(x_ts)
-    # print("Accuracy:",metrics.accuracy_score(y_ts, predicted))
 
     test_ids = []
     test_sequence = ""
